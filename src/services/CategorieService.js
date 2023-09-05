@@ -1,15 +1,15 @@
 import { config } from '../config';
 
 
-class RecetteService {
+class CategorieService {
 	baseUrl = config.baseUrl;
 	endpoint = 'categories.php';
 
-	async getAllRecettes() {
+	async getAllCategories() {
 		const response = await fetch(`${this.baseUrl}/${this.endpoint}`);
 		if (!response.ok) throw new Error(`${response.status} ${response.statusText}`);
 		return await response.json();
 	}
 }
 
-export default RecetteService;
+export default CategorieService;
