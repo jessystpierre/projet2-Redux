@@ -1,8 +1,8 @@
 import {Route, Routes} from 'react-router-dom'
 import {QueryClient, QueryClientProvider} from 'react-query'
 import Categories from './components/categories/Categories'
-//import Recette from './components/recette/Recette'
-//<Route path='/recette/:name' element={<Recette />} />
+import Recettes from './components/recettes/Recettes'
+import Recette from './components/recette/Recette'
 const queryClient = new QueryClient()
 function App() {
 
@@ -10,9 +10,11 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <Routes>
         <Route path="/" element={< Categories />}/>
-       
+        <Route path='/categorie/:name' element={< Recettes />} />
+        <Route path='/recettes/:recette/:id' element={< Recette />} />
       </Routes>
     </QueryClientProvider>
+    
   )
 }
 
