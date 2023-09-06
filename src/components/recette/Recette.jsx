@@ -5,12 +5,14 @@ import Image from 'react-bootstrap/Image'
 import Container from 'react-bootstrap/Container';
 import './Recette.css'
 import ListGroup from 'react-bootstrap/ListGroup';
-import { Link, useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import Accordion from 'react-bootstrap/Accordion';
+import Button from 'react-bootstrap/Button';
 
 const recetteDetailService = new RecetteDetailService();
 const Recette = () => {
     const params = useParams();
+    const navigate = useNavigate();
 	const { data, isLoading, isError, error } = useQuery(['recette', params.id], () => recetteDetailService.getAllRecetteDetail(params.id));
     const ingredients = [];
     const mesures = [];
@@ -21,14 +23,20 @@ const Recette = () => {
     }
     console.log(ingredients, mesures);
 	return (
-		
-		<Container className=''>
+		<Container className='recetteContent'>
 			<FetchState isLoading={isLoading} isError={isError} error={error}>
-                    <Accordion defaultActiveKey="0">
+                <Button onClick={()=>{navigate('/')}}>Retour aux catégories</Button>
+                <h1 className='text-center'>{data?.meals[0].strMeal}</h1>
+                <h2 className='text-center'>Catégorie : {data?.meals[0].strCategory}</h2>
+                <Image className='recetteImg' src={data?.meals[0].strMealThumb} fluid />
+                    <Accordion>
                         <Accordion.Item eventKey="0">
-                            <Accordion.Header>Ingredients</Accordion.Header>
+                            <Accordion.Header>Ingrédients et instructions</Accordion.Header>
                             <Accordion.Body>
                                 <ListGroup>
+                                        <ListGroup.Item>
+                                            {data?.meals[0].strInstructions}
+                                        </ListGroup.Item>
                                     { ingredients.map( (ingredient, index) => (
                                         <ListGroup.Item key={index}>
                                             {ingredient + " " + mesures[index]}

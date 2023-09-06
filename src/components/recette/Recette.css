@@ -1,0 +1,9 @@
+.recetteContent{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.recetteImg{
+    width: 500px;
+    margin-bottom: 20px;
+}
