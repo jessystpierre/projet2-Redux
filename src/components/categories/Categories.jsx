@@ -1,7 +1,6 @@
 import {useQuery} from 'react-query';
 import CategorieService from '../../services/CategorieService';
 import FetchState from '../fetchstate/FetchState';
-
 import Container from 'react-bootstrap/Container';
 import './Categories.css'
 import { Link } from 'react-router-dom';
@@ -19,6 +18,9 @@ const Categories = () => {
                     </Link>
                 )) }
 			</FetchState>
+			<Link to={`/recettes/favorites/`}>
+				{`Voir mes favoris`}
+			</Link>
 		</Container>
 	)
 }

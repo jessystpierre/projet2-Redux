@@ -8,6 +8,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import { useParams, useNavigate } from 'react-router-dom';
 import Accordion from 'react-bootstrap/Accordion';
 import Button from 'react-bootstrap/Button';
+import FavoriteButton from '../../favorite/components/FavoriteButton';
 
 const recetteDetailService = new RecetteDetailService();
 const Recette = () => {
@@ -21,11 +22,12 @@ const Recette = () => {
         ingredients.push(data?.meals[0][`strIngredient${i}`]);
         mesures.push(data?.meals[0][`strMeasure${i}`]);
     }
-    console.log(ingredients, mesures);
+    
 	return (
 		<Container className='recetteContent'>
 			<FetchState isLoading={isLoading} isError={isError} error={error}>
                 <Button onClick={()=>{navigate('/')}}>Retour aux catégories</Button>
+                <FavoriteButton recette={data?.meals[0]} />
                 <h1 className='text-center'>{data?.meals[0].strMeal}</h1>
                 <h2 className='text-center'>Catégorie : {data?.meals[0].strCategory}</h2>
                 <Image className='recetteImg' src={data?.meals[0].strMealThumb} fluid />

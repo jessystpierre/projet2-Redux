@@ -12,10 +12,10 @@ const recettesService = new RecettesService();
 const Recettes = () => {
     const param=useParams();
 	const navigate = useNavigate();
-	console.log(param);
+	
 	const { data, isLoading, isError, error } = useQuery(['recettes', param.name], () => recettesService.getAllRecettes(param.name));
 	console.log(data);
-	console.log(recettesService);
+	
 	return (
 		
 		<Container className='recettes'>
